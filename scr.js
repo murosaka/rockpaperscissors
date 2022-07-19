@@ -7,37 +7,16 @@ function getComputerChoice(){
 }
 
 function playRound(playerChoice, computerChoice){
-    switch (playerChoice.toLowerCase()) {
-        case 'rock':
-            if (computerChoice == 'scissors') {
-                return 'win';
-                break;
-            } else if (computerChoice == 'rock') {
-                return 'tie';
-                break;
-            } 
-            return 'lost';
-            break;
-        case 'paper':
-            if (computerChoice == 'scissors') {
-                return 'lost';
-                break;
-            } else if (computerChoice == 'rock') {
-                return 'win';
-                break;
-            } 
-            return 'tie';
-            break;
-        case 'scissors':
-            if (computerChoice == 'scissors') {
-                return 'tie';
-                break;
-            } else if (computerChoice == 'rock') {
-                return 'lost';
-                break;
-            } 
-            return 'win';
-            break;
+    if (playerChoice.toLowerCase() == computerChoice) {
+        return "tie";
+    } else if (playerChoice.toLowerCase() == "rock" && computerChoice =='scissors' ||
+                playerChoice.toLowerCase() == "paper" && computerChoice =='rock' || 
+                playerChoice.toLowerCase() == "scissors" && computerChoice =='paper') {
+        return "win";
+    }  else if (playerChoice.toLowerCase() == "rock" && computerChoice =='paper' ||
+                playerChoice.toLowerCase() == "paper" && computerChoice =='scissors' || 
+                playerChoice.toLowerCase() == "scissors" && computerChoice =='rock') {
+        return "lost";
     }
 }
 
