@@ -16,13 +16,18 @@ let playerWin = 0;
 let computerWin = 0;
 
 const buttons = document.querySelectorAll('button');
+result.setAttribute('style', 'white-space: pre;'); // necessary 
+// to have multiple lines in result.textContent
 
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-        playerWin += 1
-        result.textContent = playRound(button.id,getComputerChoice()) + 
-        '----' + playerWin;
-    })
+function showResult (e) {
+    let resulted = playRound(e.target.id,getComputerChoice());
+    result.textContent = `${resulted}\r\n`;
+    result.textContent += `Player: ${playerWin}\r\n`;
+    result.textContent += `Computer: ${computerWin}`;    
+}
+
+buttons.forEach(button => {
+    button.addEventListener('click',showResult)
 })
 
 
@@ -31,12 +36,14 @@ function playRound(playerChoice, computerChoice){
     if (playerChoice == "Rock" && computerChoice =='Scissors' ||
         playerChoice == "Paper" && computerChoice =='Rock' || 
         playerChoice == "Scissors" && computerChoice =='Paper') {
-            return 'Win';
+            playerWin += 1;
+            return 'Player Wins';
         }  
     else if (playerChoice == "Rock" && computerChoice =='Paper' ||
         playerChoice == "Paper" && computerChoice =='Scissors' || 
         playerChoice == "Scissors" && computerChoice =='Rock') {
-            return 'Lost';
+            computerWin += 1;
+            return 'Computer Wins';
         }
     else {
         return 'Tie';
